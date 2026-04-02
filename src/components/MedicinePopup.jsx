@@ -14,8 +14,8 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
     useOther && otherDays
       ? parseInt(otherDays) || 0
       : sliderIndex >= 0
-        ? DAY_STEPS[sliderIndex]
-        : 0;
+      ? DAY_STEPS[sliderIndex]
+      : 0;
 
   const progress =
     sliderIndex >= 0 ? (sliderIndex / (DAY_STEPS.length - 1)) * 100 : 0;
@@ -110,7 +110,7 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
             </div>
 
             {/* Slider */}
-            <div className="mt-4 px-1">
+            <div className="mt-4 px-1 relative">
               <input
                 type="range"
                 min="0"
@@ -120,21 +120,33 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
                   setSliderIndex(parseInt(e.target.value));
                   setUseOther(false);
                 }}
-                className="days-slider w-full cursor-pointer"
+                className="days-slider w-full cursor-pointer z-10 relative"
                 style={{ "--progress": `${progress}%` }}
               />
-              {/* Tick labels */}
-              <div className="flex justify-between mt-2 px-0">
+              
+              {/* Added Ticks and text labels with conditional coloring based on selection */}
+              <div className="flex justify-between mt-1 px-1 relative">
                 {DAY_STEPS.map((val, i) => (
-                  <span
-                    key={val}
-                    className={`text-[10px] ${i === sliderIndex
-                      ? "text-primary font-semibold"
-                      : "text-gray-400"
+                  <div key={val} className="flex flex-col items-center flex-1 text-center">
+                    {/* Small vertical tick mark */}
+                    <div
+                      className={`w-[1px] h-[5px] mb-[2px] transition-colors ${
+                        i <= sliderIndex ? "bg-primary" : "bg-gray-200"
                       }`}
-                  >
-                    {val}
-                  </span>
+                    />
+                    {/* Label number text */}
+                    <span
+                      className={`text-[10px] w-full transition-colors ${
+                        i === sliderIndex
+                          ? "text-primary font-semibold" // Bold and blue for selection
+                          : i < sliderIndex 
+                            ? "text-primary font-medium" // Lighter blue for past steps
+                            : "text-gray-400" // Gray for future steps
+                      }`}
+                    >
+                      {val}
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>

@@ -56,7 +56,9 @@ export default function RightPanel({ medicines, onMedicineClick, treatmentQuery 
       {/* Search */}
       <div className="p-4 pb-2">
         <div className="flex items-center bg-soft-gray rounded-xl px-3 py-2.5 gap-2">
+          <button className="text-gray-400">
           <SearchIcon />
+          </button>
           <input
             type="text"
             placeholder="Search"
@@ -64,9 +66,6 @@ export default function RightPanel({ medicines, onMedicineClick, treatmentQuery 
             onChange={(e) => setSearch(e.target.value)}
             className="flex-1 bg-transparent text-sm outline-none placeholder-gray-400"
           />
-          <button className="text-gray-400">
-            <MicIcon />
-          </button>
         </div>
       </div>
 
