@@ -63,6 +63,8 @@ export default function Sidebar({
   selectedPatient,
   onSelectPatient,
   onAddSection,
+  onLogout,
+  user
 }) {
   const [showQueue, setShowQueue] = useState(false);
   const [showAddMenu, setShowAddMenu] = useState(false);
@@ -141,7 +143,7 @@ export default function Sidebar({
               Dermatologist
             </p>
             <p className="text-white text-sm font-semibold whitespace-nowrap">
-              Dr. Esther N.
+              Dr. {user ? user.name : "Esther N."}
             </p>
           </div>
         )}
@@ -313,6 +315,7 @@ export default function Sidebar({
           {expanded && <span className="text-sm">Settings</span>}
         </button>
         <button
+          onClick={onLogout}
           className={`flex items-center gap-3 text-red-400 active:text-red-300 transition-colors ${
             expanded ? "px-5 py-2.5" : "justify-center py-2.5 w-full"
           }`}

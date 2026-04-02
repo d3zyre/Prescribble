@@ -176,6 +176,109 @@ const medicines = [
       { name: "Fusigen", stock: "Out of Stock" },
     ],
   },
+  {
+    id: 19,
+    name: "Ultrasonography (USG)",
+    dosage: "N/A",
+    brands: [
+      { name: "Radiology", stock: "Available" },
+    ],
+  },
+  {
+    id: 20,
+    name: "X-Ray",
+    dosage: "N/A",
+    brands: [
+      { name: "Radiology", stock: "Available" },
+    ],
+  },
+  {
+    id: 21,
+    name: "MRI Scan",
+    dosage: "N/A",
+    brands: [
+      { name: "Radiology", stock: "Available" },
+    ],
+  },
+  {
+    id: 22,
+    name: "CT Scan",
+    dosage: "N/A",
+    brands: [
+      { name: "Radiology", stock: "Available" },
+    ],
+  },
+  {
+    id: 23,
+    name: "Blood Test (CBC)",
+    dosage: "N/A",
+    brands: [
+      { name: "Pathology", stock: "Available" },
+    ],
+  },
+  {
+    id: 24,
+    name: "Electrocardiogram (ECG)",
+    dosage: "N/A",
+    brands: [
+      { name: "Cardiology", stock: "Available" },
+    ],
+  },
+  {
+    id: 25,
+    name: "Endoscopy",
+    dosage: "N/A",
+    brands: [
+      { name: "Gastroenterology", stock: "Available" },
+    ],
+  },
+  {
+    id: 26,
+    name: "Paracetamol 500mg Tab",
+    dosage: "500mg",
+    brands: [
+      { name: "Dolo", stock: "In Stock" },
+      { name: "Crocin", stock: "In Stock" },
+      { name: "Calpol", stock: "Out of Stock" },
+    ],
+  },
+  {
+    id: 27,
+    name: "Paracetamol 650mg Tab",
+    dosage: "650mg",
+    brands: [
+      { name: "Dolo", stock: "In Stock" },
+      { name: "Crocin Advance", stock: "In Stock" },
+    ],
+  },
+  {
+    id: 28,
+    name: "Diphenhydramine Cough Syrup",
+    dosage: "100ml",
+    brands: [
+      { name: "Benadryl", stock: "In Stock" },
+      { name: "Grilinctus", stock: "Out of Stock" },
+    ],
+  },
+  {
+    id: 29,
+    name: "Dextromethorphan Cough Syrup",
+    dosage: "100ml",
+    brands: [
+      { name: "Corex DX", stock: "In Stock" },
+      { name: "Ascoril D", stock: "In Stock" },
+    ],
+  },
+  {
+    id: 30,
+    name: "Multivitamin Syrup",
+    dosage: "200ml",
+    brands: [
+      { name: "Zincovit", stock: "In Stock" },
+      { name: "A to Z", stock: "In Stock" },
+      { name: "Supradyn", stock: "Out of Stock" },
+    ],
+  },
 ];
 
 export default medicines;
