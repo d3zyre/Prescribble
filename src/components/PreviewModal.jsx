@@ -162,7 +162,7 @@ export default function PreviewModal({
               
               {/* Name formatting updated */}
               <p className="text-[11px] text-gray-500">
-                Dr. Esther, Dermatologist
+                Dr. Esther N., Dermatologist
               </p>
             </div>
           </div>
