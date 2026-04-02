@@ -175,10 +175,10 @@ export default function App() {
           background: "linear-gradient(180deg, #1A73E8, #BDFFE6)",
         }}
       >
-        {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto px-6 py-5">
+        {/* Scrollable content container */}
+        <div className="flex-1 overflow-y-auto px-6 pt-5 flex flex-col">
           {/* Patient Details Card */}
-          <div className="bg-white rounded-2xl shadow-card p-5 mb-5">
+          <div className="bg-white rounded-2xl shadow-card p-5 mb-5 shrink-0">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-base font-bold text-gray-800 mb-2">
@@ -208,8 +208,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* Sections Container */}
-          <div className="bg-white rounded-2xl shadow-card p-5 border border-gray-100">
+          {/* Unified Sections & Bottom Bar Container */}
+          <div className="bg-white rounded-t-2xl shadow-card p-5 border border-gray-100 flex-1 flex flex-col">
             <div className="space-y-4">
               {sections.map((sec, i) => (
                 <div
@@ -305,7 +305,7 @@ export default function App() {
             </div>
 
             {/* Done / Checkmark Button */}
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end mt-4 mb-4">
               {showDone ? (
                 <button
                   onClick={() => setShowDone(false)}
@@ -325,31 +325,31 @@ export default function App() {
                 </button>
               )}
             </div>
+
+            {/* Bottom bar integrated */}
+            <div className="mt-auto pt-6 flex items-center justify-between">
+              <button
+                onClick={handleSaveDraft}
+                className="bg-navy text-white px-6 py-2.5 rounded-xl text-sm font-medium active:scale-95 transition-transform"
+              >
+                Save Draft
+              </button>
+
+              {draftSaved && (
+                <span className="text-fresh-green text-sm font-medium toast-enter">
+                  ✓ Draft saved!
+                </span>
+              )}
+
+              <button
+                onClick={() => setShowPreview(true)}
+                className="bg-navy text-white px-6 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2 active:scale-95 transition-transform"
+              >
+                Preview
+                <span>→</span>
+              </button>
+            </div>
           </div>
-        </div>
-
-        {/* Bottom bar — only in middle column */}
-        <div className="flex items-center justify-between px-6 py-3 bg-white/90 backdrop-blur-sm border-t border-white/20">
-          <button
-            onClick={handleSaveDraft}
-            className="bg-navy text-white px-6 py-2.5 rounded-xl text-sm font-medium active:scale-95 transition-transform"
-          >
-            Save Draft
-          </button>
-
-          {draftSaved && (
-            <span className="text-fresh-green text-sm font-medium toast-enter">
-              ✓ Draft saved!
-            </span>
-          )}
-
-          <button
-            onClick={() => setShowPreview(true)}
-            className="bg-navy text-white px-6 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2 active:scale-95 transition-transform"
-          >
-            Preview
-            <span>→</span>
-          </button>
         </div>
       </div>
 

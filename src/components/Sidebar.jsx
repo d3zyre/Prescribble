@@ -217,10 +217,6 @@ export default function Sidebar({
 
         {/* Add Section with blue connector lines */}
         <div className="relative">
-          {/* Blue vertical line from edge */}
-          {showAddMenu && expanded && (
-            <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-primary rounded-r-full"></div>
-          )}
           <button
             ref={addBtnRef}
             onClick={handleAddClick}
@@ -248,20 +244,24 @@ export default function Sidebar({
           {/* Dropdown with blue connector lines */}
           {showAddMenu && expanded && (
             <div className="relative ml-2 mr-2 mb-2">
-              {/* Vertical connector line */}
-              <div className="absolute left-4 top-0 bottom-2 w-[2px] bg-primary/40"></div>
-              <div className="space-y-0.5">
+              <div className="flex flex-col">
                 {addSectionOptions.map((opt, idx) => (
-                  <div key={opt} className="relative flex items-center">
-                    {/* Horizontal connector line */}
-                    <div className="absolute left-4 w-3 h-[2px] bg-primary/40"></div>
+                  <div key={opt} className="relative flex items-stretch">
+                    {/* The L-shaped branch from top center of item to vertically center, then right */}
+                    <div className="absolute left-[29px] top-0 w-[15px] h-[50%] border-l-[3px] border-b-[3px] border-primary/40 rounded-bl-[12px]"></div>
+                    
+                    {/* The continuous vertical line for non-last items */}
+                    {idx < addSectionOptions.length - 1 && (
+                      <div className="absolute left-[29px] top-[50%] bottom-0 w-[3px] bg-primary/40"></div>
+                    )}
+
                     <button
                       onClick={() => {
                         onAddSection(opt);
                         setShowAddMenu(false);
                         setActiveItem(null);
                       }}
-                      className="w-full text-left pl-9 pr-4 py-2.5 text-sm text-gray-300 hover:bg-primary/20 hover:text-white active:bg-primary active:text-white transition-colors rounded-lg"
+                      className="w-full text-left pl-[56px] pr-4 py-2.5 text-sm text-gray-300 hover:bg-primary/20 hover:text-white active:bg-primary active:text-white transition-colors rounded-xl"
                     >
                       {opt}
                     </button>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const DAY_STEPS = [1, 2, 3, 5, 7, 10, 14, 21, 28, 60];
+const DAY_STEPS = [1, 2, 3, 5, 7, 10, 14, 21, 28, 30, 60];
 
 export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
   // ALL fields start EMPTY — doctor must manually decide everything
@@ -14,8 +14,8 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
     useOther && otherDays
       ? parseInt(otherDays) || 0
       : sliderIndex >= 0
-      ? DAY_STEPS[sliderIndex]
-      : 0;
+        ? DAY_STEPS[sliderIndex]
+        : 0;
 
   const progress =
     sliderIndex >= 0 ? (sliderIndex / (DAY_STEPS.length - 1)) * 100 : 0;
@@ -85,23 +85,26 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
           {/* LEFT - Days Selector */}
           <div className="flex-1 px-6 py-5">
             {/* Selected value tooltip */}
-            <div className="flex justify-center mb-2">
-              <div className="relative">
+            <div className="relative h-10 mb-2 w-full px-1">
+              <div
+                className="absolute bottom-0 -translate-x-1/2 transition-all duration-200 flex flex-col items-center"
+                style={{
+                  left: useOther || sliderIndex < 0 ? "50%" : `calc(${progress}% + ${8 - (progress / 100) * 16}px)`,
+                }}
+              >
                 <div
-                  className={`text-sm font-semibold px-3 py-1.5 rounded-lg min-w-[40px] text-center ${
-                    sliderIndex >= 0 || (useOther && otherDays)
-                      ? "bg-primary text-white"
-                      : "bg-gray-200 text-gray-400"
-                  }`}
+                  className={`text-sm font-semibold px-3 py-1.5 rounded-lg min-w-[40px] text-center ${sliderIndex >= 0 || (useOther && otherDays)
+                    ? "bg-primary text-white shadow-md shadow-primary/20"
+                    : "bg-gray-200 text-gray-400"
+                    }`}
                 >
                   {selectedDays > 0 ? selectedDays : "—"}
                 </div>
                 <div
-                  className={`absolute left-1/2 -translate-x-1/2 -bottom-1 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent ${
-                    sliderIndex >= 0 || (useOther && otherDays)
-                      ? "border-t-primary"
-                      : "border-t-gray-200"
-                  }`}
+                  className={`w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent ${sliderIndex >= 0 || (useOther && otherDays)
+                    ? "border-t-primary"
+                    : "border-t-gray-200"
+                    }`}
                 ></div>
               </div>
             </div>
@@ -125,11 +128,10 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
                 {DAY_STEPS.map((val, i) => (
                   <span
                     key={val}
-                    className={`text-[10px] ${
-                      i === sliderIndex
-                        ? "text-primary font-semibold"
-                        : "text-gray-400"
-                    }`}
+                    className={`text-[10px] ${i === sliderIndex
+                      ? "text-primary font-semibold"
+                      : "text-gray-400"
+                      }`}
                   >
                     {val}
                   </span>
@@ -181,21 +183,19 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
                     className="flex flex-col items-center gap-1"
                   >
                     <div
-                      className={`w-5 h-5 rounded-full border-2 transition-all ${
-                        frequency[i]
-                          ? "bg-primary border-primary"
-                          : "bg-white border-gray-300"
-                      }`}
+                      className={`w-5 h-5 rounded-full border-2 transition-all ${frequency[i]
+                        ? "bg-primary border-primary"
+                        : "bg-white border-gray-300"
+                        }`}
                     />
                     <span className="text-[9px] text-gray-500">{label}</span>
                   </button>
                   {i < 2 && (
                     <div
-                      className={`w-8 h-[2px] mb-4 ${
-                        frequency[i] && frequency[i + 1]
-                          ? "bg-primary"
-                          : "bg-gray-200"
-                      }`}
+                      className={`w-8 h-[2px] mb-4 ${frequency[i] && frequency[i + 1]
+                        ? "bg-primary"
+                        : "bg-gray-200"
+                        }`}
                     />
                   )}
                 </div>
@@ -203,27 +203,25 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
             </div>
 
             {/* Meal Timing Toggle */}
-            <p className="text-xs text-gray-500 mb-3 font-medium">
+            <p className="text-xs text-gray-500 mb-2 font-medium">
               Meal Timing
             </p>
-            <div className="flex rounded-xl overflow-hidden border border-gray-200">
+            <div className="flex bg-gray-100 rounded-full p-[3px]">
               <button
                 onClick={() => setMealTiming("Before Meal")}
-                className={`flex-1 py-2.5 text-sm font-medium transition-colors ${
-                  mealTiming === "Before Meal"
-                    ? "bg-primary text-white"
-                    : "bg-white text-gray-600"
-                }`}
+                className={`flex-1 py-1 text-sm font-medium transition-all rounded-full ${mealTiming === "Before Meal"
+                  ? "bg-primary text-white"
+                  : "text-gray-500 hover:text-gray-700"
+                  }`}
               >
                 Before Meal
               </button>
               <button
                 onClick={() => setMealTiming("After Meal")}
-                className={`flex-1 py-2.5 text-sm font-medium transition-colors ${
-                  mealTiming === "After Meal"
-                    ? "bg-primary text-white"
-                    : "bg-white text-gray-600"
-                }`}
+                className={`flex-1 py-1 text-sm font-medium transition-all rounded-full ${mealTiming === "After Meal"
+                  ? "bg-primary text-white"
+                  : "text-gray-500 hover:text-gray-700"
+                  }`}
               >
                 After Meal
               </button>
@@ -242,11 +240,10 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
           <button
             onClick={handleConfirm}
             disabled={!isValid}
-            className={`px-5 py-2 rounded-xl text-sm font-medium transition-colors ${
-              isValid
-                ? "text-white bg-primary active:bg-primary-dark"
-                : "text-gray-400 bg-gray-100 cursor-not-allowed"
-            }`}
+            className={`px-5 py-2 rounded-xl text-sm font-medium transition-colors ${isValid
+              ? "text-white bg-primary active:bg-primary-dark"
+              : "text-gray-400 bg-gray-100 cursor-not-allowed"
+              }`}
           >
             Add to Treatment
           </button>
