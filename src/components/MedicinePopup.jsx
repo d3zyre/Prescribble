@@ -3,7 +3,7 @@ import { useState } from "react";
 const DAY_STEPS = [1, 2, 3, 5, 7, 10, 14, 21, 28, 30, 60];
 
 export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
-  // ALL fields start EMPTY — doctor must manually decide everything
+  // ALL fields start EMPTY - doctor must manually decide everything
   const [sliderIndex, setSliderIndex] = useState(-1); // -1 = nothing selected
   const [otherDays, setOtherDays] = useState("");
   const [useOther, setUseOther] = useState(false);
@@ -98,7 +98,7 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
                     : "bg-gray-200 text-gray-400"
                     }`}
                 >
-                  {selectedDays > 0 ? selectedDays : "—"}
+                  {selectedDays > 0 ? selectedDays : "-"}
                 </div>
                 <div
                   className={`w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent ${sliderIndex >= 0 || (useOther && otherDays)

@@ -127,7 +127,7 @@ export default function RightPanel({ medicines, onMedicineClick, treatmentQuery 
                   className="w-full text-left py-2.5 border-b border-gray-50 last:border-0 active:bg-gray-50 transition-colors"
                 >
                   <p className="text-sm text-gray-800 leading-snug">
-                    {med.name} —{" "}
+                    {med.name} -{" "}
                     <span className="text-gray-600 font-medium">
                       {brand.name}
                     </span>

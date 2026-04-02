@@ -51,7 +51,7 @@ export default function App() {
     setShowDone(false);
   };
 
-  // Handle medicine click from right panel — opens popup
+  // Handle medicine click from right panel - opens popup
   const handleMedicineClick = (medicine, brand) => {
     setSelectedMedicine(medicine);
     setSelectedBrand(brand);
@@ -141,7 +141,7 @@ export default function App() {
     setTreatments((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Treatment textarea handler — sends query to right panel instead of showing dropdown
+  // Treatment textarea handler - sends query to right panel instead of showing dropdown
   const handleTreatmentChange = (e) => {
     const val = e.target.value;
     setTreatmentText(val);
@@ -158,7 +158,7 @@ export default function App() {
 
   return (
     <div className="h-full flex bg-gray-50">
-      {/* LEFT — Sidebar */}
+      {/* LEFT - Sidebar */}
       <Sidebar
         expanded={sidebarExpanded}
         setExpanded={setSidebarExpanded}
@@ -168,7 +168,7 @@ export default function App() {
         onAddSection={handleAddSection}
       />
 
-      {/* MIDDLE — Content area with gradient */}
+      {/* MIDDLE - Content area with gradient */}
       <div
         className="flex-1 flex flex-col overflow-hidden"
         style={{
@@ -247,8 +247,8 @@ export default function App() {
                           <span className="font-medium">
                             {t.medicine.name}
                           </span>{" "}
-                          ({t.medicine.brand}) — {t.days} days,{" "}
-                          {t.frequency.join("/")} — {t.mealTiming}
+                          ({t.medicine.brand}) - {t.days} days,{" "}
+                          {t.frequency.join("/")} - {t.mealTiming}
                         </span>
                         <button
                           onClick={() => removeTreatment(i)}
@@ -261,7 +261,7 @@ export default function App() {
                   </div>
                 )}
 
-                {/* Treatment textarea — NO autocomplete dropdown, filters right panel instead */}
+                {/* Treatment textarea - NO autocomplete dropdown, filters right panel instead */}
                 <textarea
                   ref={treatmentRef}
                   className="scribble-input w-full bg-transparent text-sm text-gray-700 outline-none min-h-[80px] leading-relaxed"
@@ -353,14 +353,14 @@ export default function App() {
         </div>
       </div>
 
-      {/* RIGHT — Panel (full height, separate column) */}
+      {/* RIGHT - Panel (full height, separate column) */}
       <RightPanel
         medicines={medicinesData}
         onMedicineClick={handleMedicineClick}
         treatmentQuery={treatmentQuery}
       />
 
-      {/* Medicine Popup — RESTORED as modal */}
+      {/* Medicine Popup - RESTORED as modal */}
       {showPopup && selectedMedicine && selectedBrand && (
         <MedicinePopup
           key={`${selectedMedicine.id}-${selectedBrand.name}-${Date.now()}`}

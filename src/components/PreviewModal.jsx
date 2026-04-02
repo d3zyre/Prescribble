@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import signImage from "./sign.png"; // Importing the signature image
 
 export default function PreviewModal({
   patient,
@@ -10,59 +10,7 @@ export default function PreviewModal({
 }) {
   if (!patient) return null;
 
-  const [signatureData, setSignatureData] = useState(null);
-  const [isSigning, setIsSigning] = useState(false);
-  const canvasRef = useRef(null);
-  const isDrawingRef = useRef(false);
-  const lastPosRef = useRef({ x: 0, y: 0 });
-
   const allSections = [...sections];
-
-  // --- Signature pad handlers ---
-  const startDrawing = (e) => {
-    if (!canvasRef.current) return;
-    isDrawingRef.current = true;
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = (e.clientX || e.touches?.[0]?.clientX) - rect.left;
-    const y = (e.clientY || e.touches?.[0]?.clientY) - rect.top;
-    lastPosRef.current = { x, y };
-    setIsSigning(true);
-  };
-
-  const draw = (e) => {
-    if (!isDrawingRef.current || !canvasRef.current) return;
-    e.preventDefault();
-    const ctx = canvasRef.current.getContext("2d");
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = (e.clientX || e.touches?.[0]?.clientX) - rect.left;
-    const y = (e.clientY || e.touches?.[0]?.clientY) - rect.top;
-
-    ctx.beginPath();
-    ctx.moveTo(lastPosRef.current.x, lastPosRef.current.y);
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = "#1A73E8";
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.stroke();
-    lastPosRef.current = { x, y };
-  };
-
-  const stopDrawing = () => {
-    if (!isDrawingRef.current) return;
-    isDrawingRef.current = false;
-    if (canvasRef.current) {
-      setSignatureData(canvasRef.current.toDataURL());
-    }
-  };
-
-  const clearSignature = () => {
-    if (!canvasRef.current) return;
-    const ctx = canvasRef.current.getContext("2d");
-    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-    setSignatureData(null);
-    setIsSigning(false);
-  };
 
   return (
     <div
@@ -137,7 +85,7 @@ export default function PreviewModal({
                 {sec.title}
               </h4>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                {sec.content || "—"}
+                {sec.content || "-"}
               </p>
             </div>
           ))}
@@ -153,7 +101,7 @@ export default function PreviewModal({
                     className="bg-soft-gray/50 rounded-xl p-3 text-sm"
                   >
                     <p className="font-medium text-gray-800">
-                      {i + 1}. {t.medicine.name} — {t.medicine.brand}
+                      {i + 1}. {t.medicine.name} - {t.medicine.brand}
                     </p>
                     <p className="text-gray-500 text-xs mt-1">
                       {t.days} days · {t.frequency.join(", ")} ·{" "}
@@ -169,7 +117,7 @@ export default function PreviewModal({
               </p>
             )}
             {treatments.length === 0 && !treatmentText && (
-              <p className="text-sm text-gray-400">—</p>
+              <p className="text-sm text-gray-400">-</p>
             )}
           </div>
 
@@ -191,46 +139,32 @@ export default function PreviewModal({
             })}
 
           {/* Digital Signature */}
-          <div className="pt-4 border-t border-dashed border-gray-200">
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-sm font-bold text-primary">
-                Digital Signature
-              </h4>
-              {isSigning && (
-                <button
-                  onClick={clearSignature}
-                  className="text-xs text-red-400 hover:text-red-500 transition-colors"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-            <div className="relative border-2 border-dashed border-gray-200 rounded-xl overflow-hidden bg-gray-50/50">
-              <canvas
-                ref={canvasRef}
-                width={520}
-                height={100}
-                className="w-full cursor-crosshair"
-                style={{ touchAction: "none" }}
-                onMouseDown={startDrawing}
-                onMouseMove={draw}
-                onMouseUp={stopDrawing}
-                onMouseLeave={stopDrawing}
-                onTouchStart={startDrawing}
-                onTouchMove={draw}
-                onTouchEnd={stopDrawing}
+          <div className="pt-6 border-t border-dashed border-gray-200">
+            <h4 className="text-sm font-bold text-primary mb-4">
+              Digital Signature
+            </h4>
+            
+            {/* Left-aligned flex container for the signature block */}
+            <div className="flex flex-col items-start">
+              <p className="text-xs text-gray-500 mb-1">
+                Digitally signed by
+              </p>
+              
+              {/* Image increased in size (h-24) and negative left margin to offset natural image padding if any */}
+              <img 
+                src={signImage} 
+                alt="Dr. Esther Signature" 
+                className="h-24 w-auto object-contain -ml-2" 
               />
-              {!isSigning && (
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <p className="text-xs text-gray-400">
-                    Draw your signature here
-                  </p>
-                </div>
-              )}
+              
+              {/* Dotted line scaled roughly to the signature width */}
+              <div className="w-56 border-b border-dashed border-gray-300 mt-2 mb-2"></div>
+              
+              {/* Name formatting updated */}
+              <p className="text-[11px] text-gray-500">
+                Dr. Esther, Dermatologist
+              </p>
             </div>
-            <p className="text-[10px] text-gray-400 mt-1.5 text-center">
-              Dr. Esther N. — Dermatologist
-            </p>
           </div>
         </div>
 
