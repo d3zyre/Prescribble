@@ -45,7 +45,7 @@ export default function RightPanel({ medicines, onMedicineClick, treatmentQuery 
   const getFilteredBrands = (med) => {
     if (stockFilter === "all") return med.brands;
     if (stockFilter === "inStock")
-      return med.brands.filter((b) => b.stock === "In Stock");
+      return med.brands.filter((b) => b.stock === "In Stock" || b.stock === "Available");
     if (stockFilter === "outOfStock")
       return med.brands.filter((b) => b.stock === "Out of Stock");
     return med.brands;
@@ -135,7 +135,7 @@ export default function RightPanel({ medicines, onMedicineClick, treatmentQuery 
                   <div className="flex items-center justify-between mt-1">
                     <span
                       className={`text-xs font-medium ${
-                        brand.stock === "In Stock"
+                        brand.stock === "In Stock" || brand.stock === "Available"
                           ? "text-fresh-green"
                           : "text-red-500"
                       }`}

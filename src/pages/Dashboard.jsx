@@ -54,8 +54,22 @@ export default function Dashboard({ user, onLogout }) {
     setShowDone(false);
   };
 
-  // Handle medicine click from right panel - opens popup
+  // Handle medicine click from right panel - opens popup or appends directly
   const handleMedicineClick = (medicine, brand) => {
+    if (activeInput.type === 'dynamic') {
+      const idx = activeInput.index;
+      const isTest = brand.name === "Radiology" || brand.name === "Pathology" || brand.name === "Cardiology" || brand.name === "Gastroenterology";
+      const appendString = isTest ? medicine.name : `${medicine.name} (${brand.name})`;
+      
+      const val = dynamicSections[idx].content || "";
+      const lastNewline = val.lastIndexOf("\n");
+      const cleaned = val.substring(0, lastNewline + 1);
+      
+      updateDynamicSection(idx, cleaned + appendString + "\n");
+      setTreatmentQuery("");
+      return;
+    }
+
     setSelectedMedicine(medicine);
     setSelectedBrand(brand);
     setShowPopup(true);
