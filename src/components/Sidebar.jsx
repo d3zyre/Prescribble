@@ -64,6 +64,7 @@ export default function Sidebar({
   selectedPatient,
   onSelectPatient,
   onAddSection,
+  onScheduleClick,
   onLogout,
   user
 }) {
@@ -98,6 +99,7 @@ export default function Sidebar({
     setActiveItem(activeItem === "schedules" ? null : "schedules");
     setShowQueue(false);
     setShowAddMenu(false);
+    if (onScheduleClick) onScheduleClick();
   };
 
   return (
@@ -107,8 +109,13 @@ export default function Sidebar({
       } shrink-0`}
     >
       {/* Prescribble Logo */}
-      <div className="flex items-center justify-center pt-6 pb-2">
-        <img src={Logo} alt="Prescribble" className={`transition-all ${expanded ? 'h-8' : 'h-6'}`} />
+      <div className={`flex items-center transition-all pt-6 pb-2 ${expanded ? 'px-5 gap-3' : 'justify-center px-2'}`}>
+        <img src={Logo} alt="Prescribble" className="h-6 w-auto shrink-0" />
+        {expanded && (
+          <span className="text-white font-bold text-lg tracking-wide whitespace-nowrap overflow-hidden">
+            Prescribble
+          </span>
+        )}
       </div>
 
       {/* Doctor Profile */}

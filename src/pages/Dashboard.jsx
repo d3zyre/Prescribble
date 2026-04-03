@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import RightPanel from "../components/RightPanel";
 import MedicinePopup from "../components/MedicinePopup";
 import PreviewModal from "../components/PreviewModal";
+import ScheduleModal from "../components/ScheduleModal";
 import patientsData from "../data/patients";
 import medicinesData from "../data/medicines";
 
@@ -32,6 +33,7 @@ export default function Dashboard({ user, onLogout }) {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [showDone, setShowDone] = useState(false);
   const [draftSaved, setDraftSaved] = useState(false);
 
@@ -192,6 +194,7 @@ export default function Dashboard({ user, onLogout }) {
         selectedPatient={selectedPatient}
         onSelectPatient={handleSelectPatient}
         onAddSection={handleAddSection}
+        onScheduleClick={() => setShowScheduleModal(true)}
         onLogout={onLogout}
         user={user}
       />
@@ -413,6 +416,11 @@ export default function Dashboard({ user, onLogout }) {
           dynamicSections={dynamicSections}
           onClose={() => setShowPreview(false)}
         />
+      )}
+
+      {/* Schedule Modal */}
+      {showScheduleModal && (
+        <ScheduleModal onClose={() => setShowScheduleModal(false)} />
       )}
     </div>
   );
