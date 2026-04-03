@@ -181,7 +181,7 @@ const medicines = [
     name: "Ultrasonography (USG)",
     dosage: "N/A",
     brands: [
-      { name: "Radiology", stock: "Available" },
+      { name: "Radiology", stock: "In Stock" },
     ],
   },
   {
@@ -189,7 +189,7 @@ const medicines = [
     name: "X-Ray",
     dosage: "N/A",
     brands: [
-      { name: "Radiology", stock: "Available" },
+      { name: "Radiology", stock: "In Stock" },
     ],
   },
   {
@@ -197,7 +197,7 @@ const medicines = [
     name: "MRI Scan",
     dosage: "N/A",
     brands: [
-      { name: "Radiology", stock: "Available" },
+      { name: "Radiology", stock: "In Stock" },
     ],
   },
   {
@@ -205,7 +205,7 @@ const medicines = [
     name: "CT Scan",
     dosage: "N/A",
     brands: [
-      { name: "Radiology", stock: "Available" },
+      { name: "Radiology", stock: "In Stock" },
     ],
   },
   {
@@ -213,7 +213,7 @@ const medicines = [
     name: "Blood Test (CBC)",
     dosage: "N/A",
     brands: [
-      { name: "Pathology", stock: "Available" },
+      { name: "Pathology", stock: "In Stock" },
     ],
   },
   {
@@ -221,7 +221,7 @@ const medicines = [
     name: "Electrocardiogram (ECG)",
     dosage: "N/A",
     brands: [
-      { name: "Cardiology", stock: "Available" },
+      { name: "Cardiology", stock: "In Stock" },
     ],
   },
   {
@@ -229,7 +229,7 @@ const medicines = [
     name: "Endoscopy",
     dosage: "N/A",
     brands: [
-      { name: "Gastroenterology", stock: "Available" },
+      { name: "Gastroenterology", stock: "In Stock" },
     ],
   },
   {

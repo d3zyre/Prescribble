@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "./Logo.svg";
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -21,6 +22,7 @@ export default function Login({ onLogin }) {
     >
       <div className="bg-white rounded-2xl shadow-popup p-8 w-full max-w-md">
         <div className="text-center mb-8">
+          <img src={Logo} alt="Prescribble Logo" className="h-10 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-800">Welcome Back</h1>
           <p className="text-gray-500 text-sm mt-2">Login to your account</p>
         </div>

@@ -49,6 +49,16 @@ const patients = [
     symptoms: "White patches on neck and hands",
     diagnosis: "Vitiligo",
   },
+  {
+    id: 6,
+    name: "Aarushi Desai",
+    mrNo: "#2378461",
+    dob: "14.07.1996",
+    age: "29",
+    gender: "Female",
+    symptoms: "High fever (102°F), severe body ache, mild dry cough for 3 days",
+    diagnosis: "Viral Infection",
+  }
 ];
 
 export default patients;

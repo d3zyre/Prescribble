@@ -23,8 +23,9 @@ export default function Dashboard({ user, onLogout }) {
     { title: "Diagnosis", content: patientsData[0].diagnosis },
   ]);
   const [treatmentText, setTreatmentText] = useState("");
-  const [treatments, setTreatments] = useState([]);
-  const [dynamicSections, setDynamicSections] = useState([]);
+  const [treatments, setTreatments] = useState(patientsData[0].treatments || []);
+  const [dynamicSections, setDynamicSections] = useState(patientsData[0].dynamicSections || []);
+  const [activeInput, setActiveInput] = useState({ type: 'treatment' });
 
   // Popup state (restored)
   const [showPopup, setShowPopup] = useState(false);
@@ -46,8 +47,8 @@ export default function Dashboard({ user, onLogout }) {
       { title: "Diagnosis", content: patient.diagnosis },
     ]);
     setTreatmentText("");
-    setTreatments([]);
-    setDynamicSections([]);
+    setTreatments(patient.treatments || []);
+    setDynamicSections(patient.dynamicSections || []);
     setShowDone(false);
   };
 
@@ -64,16 +65,27 @@ export default function Dashboard({ user, onLogout }) {
     setShowPopup(false);
     setSelectedMedicine(null);
     setSelectedBrand(null);
-    // Clear the treatment text that triggered the search
-    if (treatmentRef.current) {
-      const val = treatmentRef.current.value;
-      const cursorPos = treatmentRef.current.selectionStart;
-      const textUpToCursor = val.substring(0, cursorPos);
-      const lastNewline = textUpToCursor.lastIndexOf("\n");
-      const cleaned =
-        val.substring(0, lastNewline + 1) + val.substring(cursorPos);
-      setTreatmentText(cleaned.trim());
+
+    // Clear the text that triggered the search based on activeInput
+    if (activeInput.type === 'treatment') {
+      const val = treatmentText;
+      if (treatmentRef.current) {
+        const cursorPos = treatmentRef.current.selectionStart || val.length;
+        const textUpToCursor = val.substring(0, cursorPos);
+        const lastNewline = textUpToCursor.lastIndexOf("\n");
+        const cleaned = val.substring(0, lastNewline + 1) + val.substring(cursorPos);
+        setTreatmentText(cleaned.trim());
+      }
+    } else if (activeInput.type === 'dynamic') {
+      const idx = activeInput.index;
+      const val = dynamicSections[idx].content;
+      // Because we don't have refs for dynamic sections, we will just use a simple regex or search to remove the last typed query line if possible, or just append it and remove the query by finding the last occurrence of the query.
+      // But simpler: since we know the query, we can just remove it from the end of the content.
+      const lastNewline = val.lastIndexOf("\n");
+      const cleaned = val.substring(0, lastNewline + 1);
+      updateDynamicSection(idx, cleaned.trim());
     }
+
     setTreatmentQuery("");
   };
 
@@ -136,6 +148,19 @@ export default function Dashboard({ user, onLogout }) {
     });
   };
 
+  const handleDynamicChange = (e, index) => {
+    const val = e.target.value;
+    updateDynamicSection(index, val);
+    setActiveInput({ type: 'dynamic', index });
+
+    // Send query to right panel for filtering
+    const cursorPos = e.target.selectionStart;
+    const textUpToCursor = val.substring(0, cursorPos);
+    const lastNewline = textUpToCursor.lastIndexOf("\n");
+    const currentLine = textUpToCursor.substring(lastNewline + 1).trim();
+    setTreatmentQuery(currentLine.length >= 2 ? currentLine : "");
+  };
+
   // Remove a treatment
   const removeTreatment = (index) => {
     setTreatments((prev) => prev.filter((_, i) => i !== index));
@@ -145,6 +170,7 @@ export default function Dashboard({ user, onLogout }) {
   const handleTreatmentChange = (e) => {
     const val = e.target.value;
     setTreatmentText(val);
+    setActiveInput({ type: 'treatment' });
 
     // Get the current line being typed
     const cursorPos = e.target.selectionStart;
@@ -224,8 +250,8 @@ export default function Dashboard({ user, onLogout }) {
                   <textarea
                     className="scribble-input w-full bg-transparent text-sm text-gray-700 outline-none min-h-[40px] leading-relaxed"
                     placeholder="Write with Apple Pencil..."
-                    defaultValue={sec.content}
-                    onBlur={(e) => updateSection(i, e.target.value)}
+                    value={sec.content}
+                    onChange={(e) => updateSection(i, e.target.value)}
                     rows={2}
                   />
                 </div>
@@ -298,8 +324,8 @@ export default function Dashboard({ user, onLogout }) {
                   <textarea
                     className="scribble-input w-full bg-transparent text-sm text-gray-700 outline-none min-h-[60px] leading-relaxed"
                     placeholder={sec.placeholder || "Write with Apple Pencil..."}
-                    defaultValue={sec.content}
-                    onBlur={(e) => updateDynamicSection(i, e.target.value)}
+                    value={sec.content}
+                    onChange={(e) => handleDynamicChange(e, i)}
                     rows={3}
                   />
                 </div>

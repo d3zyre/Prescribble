@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import Logo from "../pages/Logo.svg";
 
 // SVG Icons
 const CalendarIcon = () => (
@@ -105,9 +106,14 @@ export default function Sidebar({
         expanded ? "w-[220px]" : "w-[68px]"
       } shrink-0`}
     >
+      {/* Prescribble Logo */}
+      <div className="flex items-center justify-center pt-6 pb-2">
+        <img src={Logo} alt="Prescribble" className={`transition-all ${expanded ? 'h-8' : 'h-6'}`} />
+      </div>
+
       {/* Doctor Profile */}
       <div
-        className={`flex items-center gap-3 px-4 pt-5 pb-4 cursor-pointer ${
+        className={`flex items-center gap-3 px-4 pt-3 pb-4 cursor-pointer ${
           !expanded ? "justify-center px-2" : ""
         }`}
         onClick={() => {
