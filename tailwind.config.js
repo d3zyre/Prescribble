@@ -13,14 +13,20 @@ export default {
         'primary-dark': '#1557B0',
         'soft-gray': '#E5E7EB',
         'fresh-green': '#34C38F',
+        'fresh-green-dark': '#2BA87A',
         'gradient-end': '#BDFFE6',
+        'warm-teal': '#0D9488',
       },
       fontFamily: {
         'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       boxShadow: {
-        'card': '0 2px 12px rgba(0,0,0,0.08)',
-        'popup': '0 8px 32px rgba(0,0,0,0.2)',
+        'card': '0 1px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)',
+        'popup': '0 8px 32px rgba(0,0,0,0.18)',
+        'soft': '0 1px 4px rgba(0,0,0,0.05)',
+      },
+      animation: {
+        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       }
     },
   },
