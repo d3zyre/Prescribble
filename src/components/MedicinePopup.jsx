@@ -214,29 +214,23 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
               ))}
             </div>
 
-            {/* Meal Timing Toggle */}
+            {/* Meal Timing Toggle - 3 options */}
             <p className="text-xs text-gray-500 mb-2 font-medium">
               Meal Timing
             </p>
-            <div className="flex bg-gray-100 rounded-full p-[3px]">
-              <button
-                onClick={() => setMealTiming("Before Meal")}
-                className={`flex-1 py-1 text-sm font-medium transition-all rounded-full ${mealTiming === "Before Meal"
-                  ? "bg-primary text-white"
-                  : "text-gray-500 hover:text-gray-700"
-                  }`}
-              >
-                Before Meal
-              </button>
-              <button
-                onClick={() => setMealTiming("After Meal")}
-                className={`flex-1 py-1 text-sm font-medium transition-all rounded-full ${mealTiming === "After Meal"
-                  ? "bg-primary text-white"
-                  : "text-gray-500 hover:text-gray-700"
-                  }`}
-              >
-                After Meal
-              </button>
+            <div className="flex flex-col gap-1.5">
+              {["Empty Stomach", "Before Meal", "After Meal"].map((option) => (
+                <button
+                  key={option}
+                  onClick={() => setMealTiming(option)}
+                  className={`w-full py-1.5 text-sm font-medium transition-all rounded-full ${mealTiming === option
+                    ? "bg-primary text-white"
+                    : "bg-gray-100 text-gray-500 hover:text-gray-700"
+                    }`}
+                >
+                  {option}
+                </button>
+              ))}
             </div>
           </div>
         </div>

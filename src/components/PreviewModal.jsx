@@ -7,6 +7,7 @@ export default function PreviewModal({
   treatmentText,
   dynamicSections,
   onClose,
+  onComplete,
 }) {
   if (!patient) return null;
 
@@ -177,12 +178,10 @@ export default function PreviewModal({
             Close
           </button>
           <button
-            onClick={() => {
-              window.print();
-            }}
+            onClick={onComplete}
             className="px-5 py-2 rounded-xl text-sm text-white bg-primary active:bg-primary-dark transition-colors font-medium"
           >
-            Print
+            Complete
           </button>
         </div>
       </div>

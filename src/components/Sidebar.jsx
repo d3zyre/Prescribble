@@ -109,10 +109,10 @@ export default function Sidebar({
       } shrink-0`}
     >
       {/* Prescribble Logo */}
-      <div className={`flex items-center transition-all pt-6 pb-2 ${expanded ? 'px-5 gap-3' : 'justify-center px-2'}`}>
+      <div className={`flex items-center transition-all pt-5 pb-1 ${expanded ? 'px-5 gap-2.5' : 'justify-center px-2'}`}>
         <img src={Logo} alt="Prescribble" className="h-6 w-auto shrink-0" />
         {expanded && (
-          <span className="text-white font-bold text-lg tracking-wide whitespace-nowrap overflow-hidden">
+          <span className="text-white font-semibold text-[17px] tracking-wide whitespace-nowrap overflow-hidden">
             Prescribble
           </span>
         )}
@@ -161,6 +161,9 @@ export default function Sidebar({
           </div>
         )}
       </div>
+
+      {/* Divider */}
+      <div className={`mx-3 border-t border-white/10 ${expanded ? 'mx-4' : 'mx-3'}`} />
 
       {/* Menu Items */}
       <div className="flex-1 flex flex-col mt-2 overflow-y-auto" style={{ overflowX: 'visible' }}>
@@ -213,7 +216,7 @@ export default function Sidebar({
                 }`}
               >
                 <p className="text-[10px] text-gray-500">
-                  MR No. {p.mrNo}
+                  Token {p.tokenNo}
                 </p>
                 <p
                   className={`text-xs ${
@@ -318,24 +321,27 @@ export default function Sidebar({
       </div>
 
       {/* Bottom - Settings & Logout */}
-      <div className="mt-auto pb-5">
-        <button
-          className={`flex items-center gap-3 text-gray-400 active:text-white transition-colors ${
-            expanded ? "px-5 py-2.5" : "justify-center py-2.5 w-full"
-          }`}
-        >
-          <SettingsIcon />
-          {expanded && <span className="text-sm">Settings</span>}
-        </button>
-        <button
-          onClick={onLogout}
-          className={`flex items-center gap-3 text-red-400 active:text-red-300 transition-colors ${
-            expanded ? "px-5 py-2.5" : "justify-center py-2.5 w-full"
-          }`}
-        >
-          <LogoutIcon />
-          {expanded && <span className="text-sm">Logout Account</span>}
-        </button>
+      <div className="mt-auto">
+        <div className={`border-t border-white/10 ${expanded ? 'mx-4' : 'mx-3'} mb-2`} />
+        <div className="pb-4">
+          <button
+            className={`flex items-center gap-3 text-gray-400 hover:text-gray-200 active:text-white transition-colors ${
+              expanded ? "px-5 py-2.5" : "justify-center py-2.5 w-full"
+            }`}
+          >
+            <SettingsIcon />
+            {expanded && <span className="text-sm">Settings</span>}
+          </button>
+          <button
+            onClick={onLogout}
+            className={`flex items-center gap-3 text-red-400/80 hover:text-red-400 active:text-red-300 transition-colors ${
+              expanded ? "px-5 py-2.5" : "justify-center py-2.5 w-full"
+            }`}
+          >
+            <LogoutIcon />
+            {expanded && <span className="text-sm">Logout</span>}
+          </button>
+        </div>
       </div>
     </div>
   );

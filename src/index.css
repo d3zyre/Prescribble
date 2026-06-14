@@ -17,17 +17,17 @@ html, body, #root {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c4c4c4;
-  border-radius: 4px;
+  background: #d4d4d8;
+  border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #999;
+  background: #a1a1aa;
 }
 
 /* Custom range slider for days */
@@ -81,4 +81,34 @@ textarea.scribble-input {
 }
 .toast-enter {
   animation: slideUp 0.3s ease-out;
+}
+
+/* Modal fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modal-enter {
+  animation: fadeIn 0.15s ease-out;
+}
+
+/* Focus visible ring for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #1A73E8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Print styles */
+@media print {
+  .sidebar-transition,
+  [class*="w-[68px]"],
+  [class*="w-[220px]"],
+  [class*="w-[280px]"] {
+    display: none !important;
+  }
+  body, html, #root {
+    overflow: visible !important;
+    height: auto !important;
+  }
 }
