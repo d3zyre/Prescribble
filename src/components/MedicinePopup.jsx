@@ -269,7 +269,7 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
                   )}
                 </div>
               </div>
-              <span className={`text-sm font-medium transition-colors ${emptyStomach ? 'text-primary' : 'text-gray-600 group-hover:text-gray-800'}`}>
+              <span className={`text-sm font-medium transition-colors text-gray-600 group-hover:text-gray-800`}>
                 Empty Stomach
               </span>
             </label>
