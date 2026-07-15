@@ -266,11 +266,11 @@ export default function Sidebar({
                 {addSectionOptions.map((opt, idx) => (
                   <div key={opt} className="relative flex items-stretch">
                     {/* The L-shaped branch from top center of item to vertically center, then right */}
-                    <div className="absolute left-[29px] top-0 w-[15px] h-[50%] border-l-[3px] border-b-[3px] border-primary/40 rounded-bl-[12px]"></div>
+                    <div className="absolute left-[29px] top-0 w-[15px] h-[50%] border-l-[1px] border-b-[1px] rounded-bl-[12px]" style={{ borderColor: '#333333' }}></div>
                     
                     {/* The continuous vertical line for non-last items */}
                     {idx < addSectionOptions.length - 1 && (
-                      <div className="absolute left-[29px] top-[50%] bottom-0 w-[3px] bg-primary/40"></div>
+                      <div className="absolute left-[29px] top-[50%] bottom-0 w-[1px]" style={{ backgroundColor: '#333333' }}></div>
                     )}
 
                     <button

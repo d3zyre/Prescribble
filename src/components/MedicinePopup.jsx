@@ -7,8 +7,9 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
   const [sliderIndex, setSliderIndex] = useState(-1); // -1 = nothing selected
   const [otherDays, setOtherDays] = useState("");
   const [useOther, setUseOther] = useState(false);
-  const [mealTiming, setMealTiming] = useState(""); // "" = none selected
+  const [mealTiming, setMealTiming] = useState("After Meal"); // defaults to After Meal
   const [frequency, setFrequency] = useState([false, false, false]); // all off
+  const [emptyStomach, setEmptyStomach] = useState(false);
 
   const selectedDays =
     useOther && otherDays
@@ -27,10 +28,10 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
   };
 
   // Validate: at least days + meal timing + 1 frequency must be set
+  // If emptyStomach is checked, frequency is not required
   const isValid =
     selectedDays > 0 &&
-    mealTiming !== "" &&
-    frequency.some((f) => f);
+    (emptyStomach || frequency.some((f) => f));
 
   const handleConfirm = () => {
     if (!isValid) return;
@@ -43,8 +44,8 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
     onConfirm({
       medicine: { ...medicine, brand: brand.name },
       days: selectedDays,
-      mealTiming,
-      frequency: times,
+      mealTiming: emptyStomach ? "Empty Stomach" : mealTiming,
+      frequency: emptyStomach ? [] : times,
     });
   };
 
@@ -186,7 +187,7 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
           {/* RIGHT - Meal Timing */}
           <div className="flex-1 px-6 py-5">
             {/* Frequency dots */}
-            <p className="text-xs text-gray-500 mb-3 font-medium">Frequency</p>
+            <p className="text-xs mb-3 font-medium text-gray-500">Frequency</p>
             <div className="flex items-center justify-center gap-1 mb-6">
               {["Morning", "Afternoon", "Night"].map((label, i) => (
                 <div key={label} className="flex items-center">
@@ -214,24 +215,64 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
               ))}
             </div>
 
-            {/* Meal Timing Toggle - 3 options */}
-            <p className="text-xs text-gray-500 mb-2 font-medium">
+            {/* Meal Timing - Pill Toggle */}
+            <p className={`text-xs mb-2 font-medium transition-colors ${emptyStomach ? 'text-gray-300' : 'text-gray-500'}`}>
               Meal Timing
             </p>
-            <div className="flex flex-col gap-1.5">
-              {["Empty Stomach", "Before Meal", "After Meal"].map((option) => (
+            <div
+              className={`relative flex rounded-full p-[2px] transition-all ${emptyStomach ? 'opacity-40 pointer-events-none' : ''}`}
+              style={{ backgroundColor: 'rgba(118, 118, 128, 0.12)', height: '32px' }}
+            >
+              {/* Sliding background indicator */}
+              <div
+                className="absolute top-[2px] bottom-[2px] rounded-full bg-white transition-all duration-300 ease-in-out"
+                style={{
+                  width: 'calc(50% - 2px)',
+                  left: mealTiming === 'Before Meal' ? '2px' : 'calc(50%)',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+                }}
+              />
+              {["Before Meal", "After Meal"].map((option) => (
                 <button
                   key={option}
                   onClick={() => setMealTiming(option)}
-                  className={`w-full py-1.5 text-sm font-medium transition-all rounded-full ${mealTiming === option
-                    ? "bg-primary text-white"
-                    : "bg-gray-100 text-gray-500 hover:text-gray-700"
-                    }`}
+                  disabled={emptyStomach}
+                  className={`relative z-10 flex-1 text-xs font-medium rounded-full transition-colors duration-300 ${
+                    mealTiming === option
+                      ? 'text-gray-800'
+                      : 'text-gray-400'
+                  }`}
                 >
                   {option}
                 </button>
               ))}
             </div>
+
+            {/* Empty Stomach Checkbox */}
+            <label className="flex items-center gap-2.5 mt-5 cursor-pointer select-none group">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={emptyStomach}
+                  onChange={(e) => setEmptyStomach(e.target.checked)}
+                  className="sr-only peer"
+                />
+                <div className={`w-[18px] h-[18px] rounded border-2 transition-all flex items-center justify-center ${
+                  emptyStomach
+                    ? 'bg-primary border-primary'
+                    : 'bg-white border-gray-300 group-hover:border-gray-400'
+                }`}>
+                  {emptyStomach && (
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                      <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </div>
+              </div>
+              <span className={`text-sm font-medium transition-colors ${emptyStomach ? 'text-primary' : 'text-gray-600 group-hover:text-gray-800'}`}>
+                Empty Stomach
+              </span>
+            </label>
           </div>
         </div>
 
