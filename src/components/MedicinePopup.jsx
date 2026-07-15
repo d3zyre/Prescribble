@@ -187,13 +187,14 @@ export default function MedicinePopup({ medicine, brand, onConfirm, onClose }) {
           {/* RIGHT - Meal Timing */}
           <div className="flex-1 px-6 py-5">
             {/* Frequency dots */}
-            <p className="text-xs mb-3 font-medium text-gray-500">Frequency</p>
-            <div className="flex items-center justify-center gap-1 mb-6">
+            <p className={`text-xs mb-3 font-medium transition-colors ${emptyStomach ? 'text-gray-300' : 'text-gray-500'}`}>Frequency</p>
+            <div className={`flex items-center justify-center gap-1 mb-6 transition-opacity ${emptyStomach ? 'opacity-40 pointer-events-none' : ''}`}>
               {["Morning", "Afternoon", "Night"].map((label, i) => (
                 <div key={label} className="flex items-center">
                   <button
                     onClick={() => toggleFrequency(i)}
                     className="flex flex-col items-center gap-1"
+                    disabled={emptyStomach}
                   >
                     <div
                       className={`w-5 h-5 rounded-full border-2 transition-all ${frequency[i]
