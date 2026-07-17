@@ -8,8 +8,8 @@ const patients = [
     dob: "22.05.2004",
     age: "22",
     gender: "Male",
-    symptoms: "Yellow spots on right toe nail, Brittle toenail",
-    diagnosis: "Nail Fungus (Onychomycosis)",
+    symptoms: "",
+    diagnosis: "",
   },
   {
     id: 2,
@@ -20,8 +20,8 @@ const patients = [
     dob: "14.08.1995",
     age: "30",
     gender: "Female",
-    symptoms: "Red itchy patches on arms",
-    diagnosis: "Eczema (Atopic Dermatitis)",
+    symptoms: "",
+    diagnosis: "",
   },
   {
     id: 3,
@@ -32,8 +32,8 @@ const patients = [
     dob: "03.11.1988",
     age: "37",
     gender: "Male",
-    symptoms: "Scaly patches on scalp, hair fall",
-    diagnosis: "Scalp Psoriasis",
+    symptoms: "",
+    diagnosis: "",
   },
   {
     id: 4,
@@ -44,8 +44,8 @@ const patients = [
     dob: "27.02.2001",
     age: "25",
     gender: "Female",
-    symptoms: "Acne on cheeks and forehead",
-    diagnosis: "Acne Vulgaris",
+    symptoms: "",
+    diagnosis: "",
   },
   {
     id: 5,
@@ -56,8 +56,8 @@ const patients = [
     dob: "19.06.1992",
     age: "33",
     gender: "Male",
-    symptoms: "White patches on neck and hands",
-    diagnosis: "Vitiligo",
+    symptoms: "",
+    diagnosis: "",
   },
   {
     id: 6,
@@ -68,8 +68,8 @@ const patients = [
     dob: "14.07.1996",
     age: "29",
     gender: "Female",
-    symptoms: "High fever (102°F), severe body ache, mild dry cough for 3 days",
-    diagnosis: "Viral Infection",
+    symptoms: "",
+    diagnosis: "",
   }
 ];
 
