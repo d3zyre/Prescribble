@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "./Logo.svg";
+import Logo from "./Logo_white.svg";
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
