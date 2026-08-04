@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo_white.svg";
 
 export default function Login({ onLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("esther@prescribble.com");
+  const [password, setPassword] = useState("password");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
