@@ -124,10 +124,6 @@ export default function RightPanel({ medicines, onMedicineClick, treatmentQuery 
                 >
                   <p className="text-[13px] text-gray-800 leading-snug">
                     {med.name}
-                    <span className="text-gray-500"> · </span>
-                    <span className="text-gray-500 font-medium text-xs">
-                      {brand.name}
-                    </span>
                   </p>
                   <div className="flex items-center justify-between mt-1">
                     <span
