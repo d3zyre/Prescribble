@@ -194,7 +194,7 @@ export default function ScheduleModal({ onClose }) {
             {slots.map((slot, slotIdx) => (
               <div
                 key={slotIdx}
-                className={`bg-white rounded-xl border border-gray-100 overflow-hidden border-l-[4px] ${slot.borderColor}`}
+                className="bg-white rounded-xl border border-gray-200/80 shadow-sm overflow-hidden"
               >
                 {/* Slot header */}
                 <div className="px-4 pt-4 pb-2">
