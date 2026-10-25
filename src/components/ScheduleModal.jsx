@@ -225,7 +225,7 @@ export default function ScheduleModal({ onClose }) {
                         key={pIdx}
                         className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                           isCurrent
-                            ? "bg-primary/5 border-l-[3px] border-primary"
+                            ? "bg-primary/5 ring-1 ring-primary/20"
                             : "hover:bg-gray-50"
                         } ${isSeen ? "opacity-60" : ""}`}
                       >
